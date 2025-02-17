@@ -1,0 +1,27 @@
+<?php
+
+return [
+    'Flash Sales' => 'Flash Sales',
+    'found' => 'No Flash Sales found',
+    'Name' => 'Name',
+    'Name English' => 'Name English',
+    'Name Arabic' => 'Name Arabic',
+    'Description' => 'Description',
+    'Description English' => 'Description English',
+    'Description Arabic' => 'Description Arabic',
+    'Start Date' => 'Start Date',
+    'Duration' => 'Duration(hours)',
+    'Percentage' => 'Percentage',
+    'Status' => 'Status',
+    'Active' => 'Active',
+    'Inactive' => 'Inactive',
+    'Created Since' => 'Created Since',
+    'Last Update' => 'Last Update',
+    'Create New Flash Sale' => 'Create New Flash Sale',
+    'Edit Flash Sale' => 'Edit Flash Sale',
+    'store_success' => 'Flash Sale Created Successfully',
+    'update_success' => 'Flash Sale Updated Successfully',
+    'delete_success' => 'Flash Sale Deleted Successfully',
+    'store_failed' => 'An error occurred while creating the flash sale.',
+    'update_failed' => 'An error occurred while updating the flash sale.',
+];

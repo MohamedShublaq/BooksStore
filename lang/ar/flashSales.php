@@ -1,0 +1,27 @@
+<?php
+
+return [
+    'Flash Sales' => 'العروض',
+    'found' => 'لا يوجد عروض',
+    'Name' => 'الاسم',
+    'Name English' => 'الاسم بالانجليزية',
+    'Name Arabic' => 'الاسم بالعربية',
+    'Description' => 'الوصف',
+    'Description English' => 'الوصف بالانجليزية',
+    'Description Arabic' => 'الوصف بالعربية',
+    'Start Date' => 'تاريخ بداية العرض',
+    'Duration' => 'المدة بالساعات',
+    'Percentage' => 'نسبة الخصم',
+    'Status' => 'حالة العرض',
+    'Active' => 'فعال',
+    'Inactive' => 'غير فعال',
+    'Created Since' => 'وقت الإضافة',
+    'Last Update' => 'آخر تعديل',
+    'Create New Flash Sale' => 'إضافة عرض جديد',
+    'Edit Flash Sale' => 'تعديل العرض',
+    'store_success' => 'تم إضافة العرض بنجاح',
+    'update_success' => 'تم تعديل العرض بنجاح',
+    'delete_success' => 'تم حذف العرض بنجاح',
+    'store_failed' => 'حدث خطأ أثناء إضافة العرض.',
+    'update_failed' => 'حدث خطأ أثناء تعديل العرض.',
+];
