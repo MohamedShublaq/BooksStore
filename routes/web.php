@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 // **************************************HomeController************************************** //
 Route::controller(HomeController::class)->group(function () {
     Route::get('/' , 'index')->name('home');
+    Route::get('/search' , 'search')->name('search'); //Ajax in home page
 });
 
 // **************************************BooksController************************************** //
