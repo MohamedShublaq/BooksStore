@@ -3,14 +3,18 @@
         <div class="row books_book" wire:key="book-{{ $book->id }}">
             <div class="col-lg-3">
                 <div class="book_image">
-                    <img src="{{ asset($book->image) }}" alt="book image" class="w-100" />
+                    <a href="{{ route('showBook', $book->slug) }}">
+                        <img src="{{ asset($book->image) }}" alt="book image" class="w-100" />
+                    </a>
                 </div>
             </div>
             <div class="col-12 col-lg-9">
                 <div class="book_detailes">
                     <div class="d-flex align-items-start book_detailes__content">
                         <div>
-                            <p class="book_detailes__title">{{ $book->name }}</p>
+                            <p class="book_detailes__title">
+                                <a href="{{ route('showBook', $book->slug) }}">{{ $book->name}}</a>
+                            </p>
                             <p class="book_detailes__description">
                                 {{ $book->description }}
                             </p>

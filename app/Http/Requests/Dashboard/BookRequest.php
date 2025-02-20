@@ -30,13 +30,14 @@ class BookRequest extends FormRequest
                 Rule::requiredIf(request()->isMethod('post')),
                 'file', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'
             ],
-            'description.en' => ['required', 'string', 'min:2'],
-            'description.ar' => ['required', 'string', 'min:2'],
+            'description' => ['required', 'string', 'min:2'],
             'quantity' => ['required', 'integer', 'min:1'],
+            'pages' => ['required', 'integer', 'min:1'],
             'rate' => ['required', 'numeric', 'min:0'],
             'publish_year' => ['required', 'digits:4', 'integer'],
             'price' => ['required', 'numeric', 'min:1'],
             'is_available' => ['required', 'boolean'],
+            'language_id' => ['required', 'exists:languages,id'],
             'category_id' => ['required', 'exists:categories,id'],
             'publisher_id' => ['required', 'exists:publishers,id'],
             'discountable_type' => ['sometimes', 'string', function ($attribute, $value, $fail) {

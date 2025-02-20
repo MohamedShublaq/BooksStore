@@ -12,7 +12,7 @@
             <form action="{{ route('admin.books.store') }}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="row">
-                    <div class="col-6">
+                    <div class="col-3">
                         <div class="form-group">
                             <label>
                                 {{ __('books.Name') }} <span style="color: red;">*</span>
@@ -21,7 +21,7 @@
                             </x-adminlte-input>
                         </div>
                     </div>
-                    <div class="col-6">
+                    <div class="col-3">
                         <div class="form-group">
                             <label>
                                 {{ __('books.Quantity') }} <span style="color: red;">*</span>
@@ -30,27 +30,30 @@
                             </x-adminlte-input>
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-6">
+                    <div class="col-3">
                         <div class="form-group">
                             <label>
-                                {{ __('books.Description English') }} <span style="color: red;">*</span>
+                                {{ __('books.Pages') }} <span style="color: red;">*</span>
                             </label>
-                            <x-adminlte-textarea name="description[en]" fgroup-class="mb-4" rows="5" required>
-                            </x-adminlte-textarea>
+                            <x-adminlte-input name="pages" type="text" fgroup-class="mb-4" required>
+                            </x-adminlte-input>
                         </div>
                     </div>
-                    <div class="col-6">
+                    <div class="col-3">
                         <div class="form-group">
                             <label>
-                                {{ __('books.Description Arabic') }} <span style="color: red;">*</span>
+                                {{ __('books.Language') }} <span style="color: red;">*</span>
                             </label>
-                            <x-adminlte-textarea name="description[ar]" fgroup-class="mb-4" rows="5" required>
-                            </x-adminlte-textarea>
+                            <x-adminlte-select name="language_id" fgroup-class="mb-4" required>
+                                <option selected disabled value="">{{ __('actions.choose') }}</option>
+                                @foreach ($languages as $language)
+                                    <option value="{{ $language->id }}">{{ $language->name }}</option>
+                                @endforeach
+                            </x-adminlte-select>
                         </div>
                     </div>
                 </div>
+
                 <div class="row">
                     <div class="col-3">
                         <div class="form-group">
@@ -151,14 +154,26 @@
                         </div>
                     </div>
                 </div>
-                <div class="row justify-content-center">
-                    <div class="form-group text-center">
-                        <label>
-                            {{ __('books.Image') }} <span style="color: red;">*</span>
-                        </label>
-                        <x-adminlte-input class="dropify mx-auto" name="image" type="file" fgroup-class="mb-4" required>
-                        </x-adminlte-input>
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label>
+                                {{ __('books.Description') }} <span style="color: red;">*</span>
+                            </label>
+                            <x-adminlte-textarea name="description" fgroup-class="mb-4" rows="8" required>
+                            </x-adminlte-textarea>
+                        </div>
                     </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label>
+                                {{ __('books.Image') }} <span style="color: red;">*</span>
+                            </label>
+                            <x-adminlte-input class="dropify mx-auto" name="image" type="file" fgroup-class="mb-4" required>
+                            </x-adminlte-input>
+                        </div>
+                    </div>
+
                 </div>
                 <div class="row">
                     <div class="col-12 d-flex justify-content-center">

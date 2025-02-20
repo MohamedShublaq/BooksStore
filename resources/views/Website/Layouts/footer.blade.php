@@ -31,15 +31,6 @@
             2025
           </p>
         </div>
-        <div class="lang d-flex gap-3">
-          <img src="{{asset('assets/website/images/lang.png')}}" alt="" class="image_lang" />
-          <select name="lang" id="lang">
-            <option value="english" class="d-flex align-items-center">
-              English
-            </option>
-            <option value="arabic">عربي</option>
-          </select>
-        </div>
       </div>
     </div>
   </footer>

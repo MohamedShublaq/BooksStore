@@ -9,6 +9,7 @@ use App\Models\Book;
 use App\Models\Category;
 use App\Models\Discount;
 use App\Models\FlashSale;
+use App\Models\Language;
 use App\Models\Publisher;
 use Carbon\Carbon;
 use Illuminate\Routing\Controllers\Middleware;
@@ -27,11 +28,12 @@ class BookController extends Controller implements HasMiddleware
 
     public function index()
     {
-        $books = Book::filter(request()->all())->with(['publisher', 'category', 'authors'])->orderByDesc('id')->paginate(10);
+        $books = Book::filter(request()->all())->with(['language', 'publisher', 'category', 'authors'])->orderByDesc('id')->paginate(10);
         $categories = Category::select('id', 'name')->get();
         $authors = Author::select('id', 'name')->get();
         $publishers = Publisher::select('id', 'name')->get();
-        return view('Dashboard.Books.index', compact('books','categories','authors','publishers'));
+        $languages = Language::select('id', 'name')->get();
+        return view('Dashboard.Books.index', compact('books','categories','authors','publishers','languages'));
     }
 
     public function create()
@@ -39,9 +41,10 @@ class BookController extends Controller implements HasMiddleware
         $categories = Category::select('id', 'name')->get();
         $authors = Author::select('id', 'name')->get();
         $publishers = Publisher::select('id', 'name')->get();
+        $languages = Language::select('id', 'name')->get();
         $discounts = Discount::where('quantity','>',0)->where('expiry_date','>',Carbon::now())->select('id', 'code', 'percentage')->get();
         $flashSales = FlashSale::where('is_active', 1)->select('id', 'name', 'percentage')->get();
-        return view('Dashboard.Books.create', compact('categories', 'authors', 'publishers', 'discounts', 'flashSales'));
+        return view('Dashboard.Books.create', compact('categories', 'authors', 'publishers', 'languages', 'discounts', 'flashSales'));
     }
 
     public function store(BookRequest $request)
@@ -87,9 +90,10 @@ class BookController extends Controller implements HasMiddleware
         $categories = Category::select('id', 'name')->get();
         $authors = Author::select('id', 'name')->get();
         $publishers = Publisher::select('id', 'name')->get();
+        $languages = Language::select('id', 'name')->get();
         $discounts = Discount::where('quantity','>',0)->where('expiry_date','>',Carbon::now())->select('id', 'code', 'percentage')->get();
         $flashSales = FlashSale::where('is_active', 1)->select('id', 'name', 'percentage')->get();
-        return view('Dashboard.Books.edit', compact('book', 'categories', 'authors', 'publishers', 'discounts', 'flashSales'));
+        return view('Dashboard.Books.edit', compact('book', 'categories', 'authors', 'publishers', 'languages', 'discounts', 'flashSales'));
     }
 
     public function update(BookRequest $request, string $id)
@@ -169,10 +173,12 @@ class BookController extends Controller implements HasMiddleware
             'name',
             'description',
             'quantity',
+            'pages',
             'rate',
             'publish_year',
             'price',
             'is_available',
+            'language_id',
             'category_id',
             'publisher_id',
             'discountable_type',

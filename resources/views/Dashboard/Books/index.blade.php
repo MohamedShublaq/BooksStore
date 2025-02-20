@@ -21,7 +21,6 @@
                     <button disabled class="btn btn-danger" id="delete-selected" data-model="Book">
                         <i class="fas fa-trash-alt"></i> {{ __('actions.delete_selected') }}
                     </button>
-                    <x-import-excel :model="'Book'" />
                     <button class="btn btn-warning">
                         <i class="fas fa-file-export"></i> {{ __('actions.export') }}
                     </button>
@@ -33,9 +32,9 @@
                 <x-table-header :headers="[
                     __('books.Name'),
                     __('books.Quantity'),
-                    __('books.Viewers'),
                     __('books.Price'),
                     __('books.Availability'),
+                    __('books.Language'),
                     __('books.Category'),
                     __('books.Publisher'),
                     __('books.Authors'),
@@ -50,7 +49,6 @@
                             <td class="text-center">{{ $loop->iteration }}</td>
                             <td class="text-center">{{ $book->name }}</td>
                             <td class="text-center">{{ $book->quantity }}</td>
-                            <td class="text-center">{{ $book->num_of_viewers }}</td>
                             <td class="text-center">{{ $book->price }}</td>
                             <td class="text-center">
                                 @if ($book->is_available == 1)
@@ -59,6 +57,7 @@
                                     <span class="badge badge-danger">{{ __('books.Unavailable') }}</span>
                                 @endif
                             </td>
+                            <td class="text-center">{{ $book->language->name }}</td>
                             <td class="text-center">{{ $book->category->name }}</td>
                             <td class="text-center">{{ $book->publisher->name }}</td>
                             <td class="text-center">

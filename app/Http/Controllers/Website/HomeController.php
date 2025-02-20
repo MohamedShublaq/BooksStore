@@ -29,7 +29,7 @@ class HomeController extends Controller
         $booksByDescription = collect();
 
         if ($booksByName->count() < 9) {
-            $booksByDescription = Book::where('description->en', 'LIKE', "%{$searchTerm}%")
+            $booksByDescription = Book::where('description', 'LIKE', "%{$searchTerm}%")
                 ->whereNotIn('id', $booksByName->pluck('id'))
                 ->select('id', 'name', 'description', 'slug')
                 ->limit(9 - $booksByName->count())

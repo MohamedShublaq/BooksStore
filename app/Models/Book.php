@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Cviebrock\EloquentSluggable\Sluggable;
-use Spatie\Translatable\HasTranslations;
 use EloquentFilter\Filterable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
@@ -12,7 +11,7 @@ use Illuminate\Support\Str;
 
 class Book extends Model
 {
-    use HasFactory, Sluggable, HasTranslations, Filterable;
+    use HasFactory, Sluggable, Filterable;
 
     /**
      * The attributes that are mass assignable.
@@ -24,21 +23,19 @@ class Book extends Model
         'image',
         'description',
         'quantity',
+        'pages',
         'num_of_viewers',
         'rate',
         'publish_year',
         'price',
         'is_available',
+        'language_id',
         'category_id',
         'publisher_id',
         'discountable_type',
         'discountable_id',
     ];
 
-    public $translatable = ['description'];
-
-
-    protected $casts = ['description' => 'array'];
 
     /**
      * Get the sluggable configuration array for the model.
@@ -136,6 +133,11 @@ class Book extends Model
     public function publisher()
     {
         return $this->belongsTo(Publisher::class);
+    }
+
+    public function language()
+    {
+        return $this->belongsTo(Language::class);
     }
 
     public function discountable()

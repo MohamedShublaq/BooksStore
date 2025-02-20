@@ -37,6 +37,13 @@ class BookFilter extends ModelFilter
         }
     }
 
+    public function language($value)
+    {
+        if (!empty($value)) {
+            return $this->where('language_id', '=', $value);
+        }
+    }
+
     public function category($value)
     {
         if (!empty($value)) {

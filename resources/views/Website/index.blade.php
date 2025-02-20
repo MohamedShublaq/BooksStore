@@ -537,6 +537,9 @@
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
+        var bookRoute = "{{ route('showBook', ':slug') }}";
+    </script>
+    <script>
         // Handle input change and make the AJAX request
         $('#searchInput').on('input', function() {
             let searchTerm = $(this).val().toLowerCase();
@@ -571,25 +574,26 @@
                                 if (book.name.toLowerCase().includes(searchTerm)) {
 
                                     let highlightedName = book.name.replace(new RegExp(`(${searchTerm})`, "gi"), "<strong>$1</strong>");
-                                    resultItem = `<li class="search-item">${highlightedName}</li>`;
+                                    let bookUrl = bookRoute.replace(':slug', book.slug);
+                                    resultItem = `<li class="search-item"><a href="${bookUrl}">${highlightedName}</a></li>`;
 
-                                } else if (book.description.en.toLowerCase().includes(searchTerm)) {
+                                } else if (book.description.toLowerCase().includes(searchTerm)) {
 
-                                    let description = book.description.en.toLowerCase();
+                                    let description = book.description.toLowerCase();
                                     let matchIndex = description.indexOf(searchTerm);
 
                                     if (matchIndex !== -1) {
                                         let start = Math.max(0, matchIndex -30);
                                         let end = Math.min(description.length, matchIndex +searchTerm.length + 30);
-                                        let snippet = book.description.en.substring(start, end);
+                                        let snippet = book.description.substring(start, end);
                                         // Highlight the matched term
                                         snippet = snippet.replace(new RegExp(`(${searchTerm})`,"gi"), "<strong>$1</strong>");
                                         // Remove leading "..." if the search term is at the start
                                         let prefix = start > 0 ? "..." : "";
                                         let suffix = end < description.length ? "..." : "";
 
-                                        resultItem =
-                                            `<li class="search-item"><p>${prefix}${snippet}${suffix}</p></li>`;
+                                        let bookUrl = bookRoute.replace(':slug', book.slug);
+                                        resultItem = `<li class="search-item"><a href="${bookUrl}">${prefix}${snippet}${suffix}</a></li>`;
                                     }
                                 }
 

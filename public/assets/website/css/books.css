@@ -34,9 +34,16 @@ body {
   border-radius: 12px;
 }
 
-.book_detailes__title {
+/* .book_detailes__title {
   font-size: 18px;
   font-weight: 700;
+} */
+
+.book_detailes__title a{
+    text-decoration: none;
+    color: inherit;
+    font-size: 18px;
+    font-weight: 700;
 }
 
 .book_detailes__description {

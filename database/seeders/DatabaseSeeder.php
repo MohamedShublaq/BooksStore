@@ -16,5 +16,6 @@ class DatabaseSeeder extends Seeder
         $this->call(AuthorizationSeeder::class);
         $this->call(AdminSeeder::class);
         $this->call(DiscountSeeder::class);
+        $this->call(LanguageSeeder::class);
     }
 }

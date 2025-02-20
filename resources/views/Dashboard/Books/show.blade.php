@@ -13,7 +13,7 @@
         </div>
         <div class="card-body">
             <div class="row">
-                <div class="col-4">
+                <div class="col-3">
                     <div class="form-group">
                         <label>
                             {{ __('books.Name') }}
@@ -22,7 +22,7 @@
                             disabled />
                     </div>
                 </div>
-                <div class="col-4">
+                <div class="col-3">
                     <div class="form-group">
                         <label>
                             {{ __('books.Quantity') }}
@@ -31,33 +31,22 @@
                             disabled />
                     </div>
                 </div>
-                <div class="col-4">
+                <div class="col-3">
+                    <div class="form-group">
+                        <label>
+                            {{ __('books.Pages') }}
+                        </label>
+                        <x-adminlte-input name="pages" type="text" value="{{ $book->pages }}" fgroup-class="mb-4"
+                            disabled />
+                    </div>
+                </div>
+                <div class="col-3">
                     <div class="form-group">
                         <label>
                             {{ __('books.Viewers') }}
                         </label>
                         <x-adminlte-input name="num_of_viewers" type="text" value="{{ $book->num_of_viewers }}"
                             fgroup-class="mb-4" disabled />
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-6">
-                    <div class="form-group">
-                        <label>
-                            {{ __('books.Description English') }}
-                        </label>
-                        <x-adminlte-textarea name="description[en]" fgroup-class="mb-4" rows="5"
-                            disabled>{{ $book->getTranslation('description', 'en') }}</x-adminlte-textarea>
-                    </div>
-                </div>
-                <div class="col-6">
-                    <div class="form-group">
-                        <label>
-                            {{ __('books.Description Arabic') }}
-                        </label>
-                        <x-adminlte-textarea name="description[ar]" fgroup-class="mb-4" rows="5"
-                            disabled>{{ $book->getTranslation('description', 'ar') }}</x-adminlte-textarea>
                     </div>
                 </div>
             </div>
@@ -104,7 +93,16 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-4">
+                <div class="col-3">
+                    <div class="form-group">
+                        <label>
+                            {{ __('books.Language') }}
+                        </label>
+                        <x-adminlte-input name="language_id" type="text" value="{{ $book->language->name ?? '' }}"
+                            fgroup-class="mb-4" disabled />
+                    </div>
+                </div>
+                <div class="col-3">
                     <div class="form-group">
                         <label>
                             {{ __('books.Category') }}
@@ -113,7 +111,7 @@
                             fgroup-class="mb-4" disabled />
                     </div>
                 </div>
-                <div class="col-4">
+                <div class="col-3">
                     <div class="form-group">
                         <label>
                             {{ __('books.Publisher') }}
@@ -122,13 +120,42 @@
                             fgroup-class="mb-4" disabled />
                     </div>
                 </div>
-                <div class="col-4">
+                <div class="col-3">
                     <div class="form-group">
                         <label>
                             {{ __('books.Authors') }}
                         </label>
                         <x-adminlte-input name="authors" type="text"
                             value="{{ $book->authors->pluck('name')->implode(', ') }}" fgroup-class="mb-4" disabled />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-group">
+                        <label>
+                            {{ __('books.Description') }}
+                        </label>
+                        <x-adminlte-textarea name="description" fgroup-class="mb-4" rows="5"
+                            disabled>{{ $book->description }}</x-adminlte-textarea>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="form-group">
+                        <label>
+                            {{ __('books.Created Since') }}
+                        </label>
+                        <x-adminlte-input name="created_at" type="text" value="{{ $book->created_at->diffForHumans() }}"
+                            fgroup-class="mb-4" disabled />
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="form-group">
+                        <label>
+                            {{ __('books.Last Update') }}
+                        </label>
+                        <x-adminlte-input name="updated_at" type="text" value="{{ $book->updated_at->diffForHumans() }}"
+                            fgroup-class="mb-4" disabled />
                     </div>
                 </div>
             </div>
@@ -159,26 +186,6 @@
                     </div>
                 </div>
             @endif
-            <div class="row">
-                <div class="col-6">
-                    <div class="form-group">
-                        <label>
-                            {{ __('books.Created Since') }}
-                        </label>
-                        <x-adminlte-input name="created_at" type="text" value="{{ $book->created_at->diffForHumans() }}"
-                            fgroup-class="mb-4" disabled />
-                    </div>
-                </div>
-                <div class="col-6">
-                    <div class="form-group">
-                        <label>
-                            {{ __('books.Last Update') }}
-                        </label>
-                        <x-adminlte-input name="updated_at" type="text" value="{{ $book->updated_at->diffForHumans() }}"
-                            fgroup-class="mb-4" disabled />
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 @stop

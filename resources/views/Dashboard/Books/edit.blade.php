@@ -13,7 +13,7 @@
                 @csrf
                 @method('PUT')
                 <div class="row">
-                    <div class="col-6">
+                    <div class="col-3">
                         <div class="form-group">
                             <label>
                                 {{ __('books.Name') }} <span style="color: red;">*</span>
@@ -22,7 +22,7 @@
                                 value="{{ $book->name }}" fgroup-class="mb-4" required />
                         </div>
                     </div>
-                    <div class="col-6">
+                    <div class="col-3">
                         <div class="form-group">
                             <label>
                                 {{ __('books.Quantity') }} <span style="color: red;">*</span>
@@ -31,26 +31,28 @@
                                 value="{{ $book->quantity }}" fgroup-class="mb-4" required />
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-6">
+                    <div class="col-3">
                         <div class="form-group">
                             <label>
-                                {{ __('books.Description English') }} <span style="color: red;">*</span>
+                                {{ __('books.Pages') }} <span style="color: red;">*</span>
                             </label>
-                            <x-adminlte-textarea name="description[en]"
-                                fgroup-class="mb-4" rows="5"
-                                required>{{ $book->getTranslation('description', 'en') }}</x-adminlte-textarea>
+                            <x-adminlte-input name="pages" type="text"
+                                value="{{ $book->pages }}" fgroup-class="mb-4" required />
                         </div>
                     </div>
-                    <div class="col-6">
+                    <div class="col-3">
                         <div class="form-group">
                             <label>
-                                {{ __('books.Description Arabic') }} <span style="color: red;">*</span>
+                                {{ __('books.Language') }} <span style="color: red;">*</span>
                             </label>
-                            <x-adminlte-textarea name="description[ar]"
-                                fgroup-class="mb-4" rows="5"
-                                required>{{ $book->getTranslation('description', 'ar') }}</x-adminlte-textarea>
+                            <x-adminlte-select name="language_id" fgroup-class="mb-4"
+                                required>
+                                @foreach ($languages as $language)
+                                    <option value="{{ $language->id }}"
+                                        {{ $book->language_id == $language->id ? 'selected' : '' }}>{{ $language->name }}
+                                    </option>
+                                @endforeach
+                            </x-adminlte-select>
                         </div>
                     </div>
                 </div>
@@ -183,13 +185,25 @@
                         </div>
                     </div>
                 </div>
-                <div class="row justify-content-center">
-                    <div class="form-group text-center">
-                        <label>
-                            {{ __('books.Image') }} <span style="color: red;">*</span>
-                        </label>
-                        <x-adminlte-input class="dropify mx-auto" name="image" type="file" fgroup-class="mb-4">
-                        </x-adminlte-input>
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label>
+                                {{ __('books.Description') }} <span style="color: red;">*</span>
+                            </label>
+                            <x-adminlte-textarea name="description"
+                                fgroup-class="mb-4" rows="8"
+                                required>{{ $book->description }}</x-adminlte-textarea>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label>
+                                {{ __('books.Image') }} <span style="color: red;">*</span>
+                            </label>
+                            <x-adminlte-input class="dropify mx-auto" name="image" type="file" fgroup-class="mb-4">
+                            </x-adminlte-input>
+                        </div>
                     </div>
                 </div>
                 <div class="row">
