@@ -40,6 +40,7 @@ class BookRequest extends FormRequest
             'language_id' => ['required', 'exists:languages,id'],
             'category_id' => ['required', 'exists:categories,id'],
             'publisher_id' => ['required', 'exists:publishers,id'],
+            'author_id' => ['required', 'exists:authors,id'],
             'discountable_type' => ['sometimes', 'string', function ($attribute, $value, $fail) {
                 if (!in_array($value, [Discount::class, FlashSale::class])) {
                     $fail(__('The selected discountable type is invalid.'));
@@ -53,8 +54,6 @@ class BookRequest extends FormRequest
                     $fail(__('The selected discountable ID for FlashSale is invalid.'));
                 }
             }],
-            'authorsIds' => ['required', 'array', 'min:1'],
-            'authorsIds.*' => ['exists:authors,id'],
         ];
     }
 }

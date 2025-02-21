@@ -46,7 +46,7 @@
                             <div class="d-flex gap-5">
                                 <div>
                                     <p class="author">Author</p>
-                                    <p class="author_name">{{ $book->authors()->first()->name }}</p>
+                                    <p class="author_name">{{ $book->author->name }}</p>
                                 </div>
                                 <div>
                                     <p class="year">Year</p>

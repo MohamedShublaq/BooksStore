@@ -28,7 +28,7 @@ class BookController extends Controller implements HasMiddleware
 
     public function index()
     {
-        $books = Book::filter(request()->all())->with(['language', 'publisher', 'category', 'authors'])->orderByDesc('id')->paginate(10);
+        $books = Book::filter(request()->all())->with(['language', 'publisher', 'category', 'author'])->orderByDesc('id')->paginate(10);
         $categories = Category::select('id', 'name')->get();
         $authors = Author::select('id', 'name')->get();
         $publishers = Publisher::select('id', 'name')->get();
@@ -64,9 +64,6 @@ class BookController extends Controller implements HasMiddleware
                 // Decrement the quantity of discount
                 $book->discountable->decrement('quantity');
             }
-
-            // Attach authors to the book
-            $this->attachAuthors($book, $request->authorsIds ?? []);
 
             DB::commit();
 
@@ -141,11 +138,6 @@ class BookController extends Controller implements HasMiddleware
                 }
             }
 
-            // Sync authors only if provided
-            if ($request->has('authorsIds')) {
-                $this->attachAuthors($book, $request->authorsIds);
-            }
-
             DB::commit();
 
             return redirect()->route('admin.books.index')->with('success', __('books.update_success'));
@@ -181,17 +173,10 @@ class BookController extends Controller implements HasMiddleware
             'language_id',
             'category_id',
             'publisher_id',
+            'author_id',
             'discountable_type',
             'discountable_id',
         ]);
-    }
-
-    /**
-     * Attach or sync authors with a book.
-     */
-    private function attachAuthors(Book $book, array $authorIds): void
-    {
-        $book->authors()->sync($authorIds);
     }
 
     /**

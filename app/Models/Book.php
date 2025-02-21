@@ -32,6 +32,7 @@ class Book extends Model
         'language_id',
         'category_id',
         'publisher_id',
+        'author_id',
         'discountable_type',
         'discountable_id',
     ];
@@ -145,9 +146,9 @@ class Book extends Model
         return $this->morphTo();
     }
 
-    public function authors()
+    public function author()
     {
-        return $this->belongsToMany(Author::class, 'author_books');
+        return $this->belongsTo(Author::class);
     }
 
     public function favorites()

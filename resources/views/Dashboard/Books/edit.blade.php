@@ -133,13 +133,13 @@
                     <div class="col-4">
                         <div class="form-group">
                             <label>
-                                {{ __('books.Authors') }} <span style="color: red;">*</span>
+                                {{ __('books.Author') }} <span style="color: red;">*</span>
                             </label>
-                            <x-adminlte-select name="authorsIds[]" fgroup-class="mb-4"
-                                multiple required>
+                            <x-adminlte-select name="author_id" fgroup-class="mb-4"
+                                required>
                                 @foreach ($authors as $author)
                                     <option value="{{ $author->id }}"
-                                        {{ in_array($author->id, $book->authors->pluck('id')->toArray()) ? 'selected' : '' }}>
+                                        {{ $book->author_id == $author->id ? 'selected' : '' }}>
                                         {{ $author->name }}</option>
                                 @endforeach
                             </x-adminlte-select>

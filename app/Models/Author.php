@@ -25,12 +25,8 @@ class Author extends Model
 
     protected $casts = ['name' => 'array'];
 
-    public function books(){
-        return $this->belongsToMany(Book::class, 'author_books');
-    }
-
-    public function authorBooks()
+    public function books()
     {
-        return $this->hasMany(AuthorBook::class);
+        return $this->hasMany(Book::class);
     }
 }

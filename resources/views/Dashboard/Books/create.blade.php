@@ -125,9 +125,10 @@
                     <div class="col-4">
                         <div class="form-group">
                             <label>
-                                {{ __('books.Authors') }} <span style="color: red;">*</span>
+                                {{ __('books.Author') }} <span style="color: red;">*</span>
                             </label>
-                            <x-adminlte-select name="authorsIds[]" fgroup-class="mb-4" multiple required>
+                            <x-adminlte-select name="author_id" fgroup-class="mb-4" required>
+                                <option selected disabled value="">{{ __('actions.choose') }}</option>
                                 @foreach ($authors as $author)
                                     <option value="{{ $author->id }}">{{ $author->name }}</option>
                                 @endforeach

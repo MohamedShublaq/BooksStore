@@ -9,7 +9,8 @@
 @section('content')
     <div class="card mx-auto">
         <div class="card-header text-center">
-            <img src="{{ asset($book->image) }}" alt="Book Image" class="img-fluid rounded" style="max-width: 200px; height: auto;">
+            <img src="{{ asset($book->image) }}" alt="Book Image" class="img-fluid rounded"
+                style="max-width: 200px; height: auto;">
         </div>
         <div class="card-body">
             <div class="row">
@@ -123,10 +124,10 @@
                 <div class="col-3">
                     <div class="form-group">
                         <label>
-                            {{ __('books.Authors') }}
+                            {{ __('books.Author') }}
                         </label>
-                        <x-adminlte-input name="authors" type="text"
-                            value="{{ $book->authors->pluck('name')->implode(', ') }}" fgroup-class="mb-4" disabled />
+                        <x-adminlte-input name="author_id" type="text" value="{{ $book->author->name ?? '' }}"
+                            fgroup-class="mb-4" disabled />
                     </div>
                 </div>
             </div>

@@ -61,9 +61,7 @@ class BookFilter extends ModelFilter
     public function author($value)
     {
         if (!empty($value)) {
-            return $this->whereHas('authors', function ($q) use ($value) {
-                $q->where('author_id', '=', $value);
-            });
+            return $this->where('author_id', '=', $value);
         }
     }
 

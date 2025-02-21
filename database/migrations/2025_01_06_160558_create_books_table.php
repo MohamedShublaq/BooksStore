@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Author;
 use App\Models\Category;
 use App\Models\Language;
 use App\Models\Publisher;
@@ -30,6 +31,7 @@ return new class extends Migration
             $table->foreignIdFor(Language::class)->nullable()->constrained()->nullOnDelete();
             $table->foreignIdFor(Category::class)->nullable()->constrained()->nullOnDelete();
             $table->foreignIdFor(Publisher::class)->nullable()->constrained()->nullOnDelete();
+            $table->foreignIdFor(Author::class)->nullable()->constrained()->nullOnDelete();
             $table->nullableMorphs('discountable');//discount or flash sale
             $table->timestamps();
         });

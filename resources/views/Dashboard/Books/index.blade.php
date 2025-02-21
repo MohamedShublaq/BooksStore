@@ -37,7 +37,7 @@
                     __('books.Language'),
                     __('books.Category'),
                     __('books.Publisher'),
-                    __('books.Authors'),
+                    __('books.Author'),
                     __('books.Discountable'),
                 ]" />
                 <tbody>
@@ -60,13 +60,7 @@
                             <td class="text-center">{{ $book->language->name }}</td>
                             <td class="text-center">{{ $book->category->name }}</td>
                             <td class="text-center">{{ $book->publisher->name }}</td>
-                            <td class="text-center">
-                                @foreach ($book->authors as $author)
-                                    {{ $author->name }}@if (!$loop->last)
-                                        ,
-                                    @endif
-                                @endforeach
-                            </td>
+                            <td class="text-center">{{ $book->author->name }}</td>
                             <td class="text-center">
                                 @if ($book->discountable)
                                     @if ($book->discountable_type === 'App\Models\Discount')

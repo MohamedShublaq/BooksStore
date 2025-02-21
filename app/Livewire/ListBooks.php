@@ -38,7 +38,7 @@ class ListBooks extends Component
 
     public function render()
     {
-        $query = Book::with('authors');
+        $query = Book::with('author');
 
         if (!empty($this->selectedCategories)) {
             $query->whereIn('category_id', $this->selectedCategories);
