@@ -21,8 +21,7 @@
                         <div class="item-cart row" wire:key="book-{{ $book->id }}">
                             <div class="col-lg-2 col-md-4 col-sm-6">
                                 <div class="item-image">
-                                    <img src="{{ $book->image}}" alt=""
-                                        class="w-100 h-100" />
+                                    <img src="{{ $book->image }}" alt="" class="w-100 h-100" />
                                 </div>
                             </div>
                             <div class="col-lg-3 col-md-4 col-sm-6">
@@ -30,21 +29,29 @@
                                     <p class="fw-bold">{{ $book->name }}</p>
                                     <p class="description">
                                         Author:
-                                        <span class="fw-bold text-dark">Robert T. Kiyosanki</span>
+                                        <span class="fw-bold text-dark">{{ $book->author->name }}</span>
                                     </p>
                                     <p class="description book-description">
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                        Mauris et ultricies est. Aliquam in justo varius, sagittis
-                                        neque ut,
+                                        {{ $book->description }}
                                     </p>
-                                    <div class="dlivery d-flex gap-3">
-                                        <img src="{{ asset('assets/website/images/shipping.png') }}" alt=""
-                                            width="20" height="20" />
-                                        <p class="description">Free Shipping Today</p>
-                                    </div>
-                                    <p class="description">
-                                        <span class="sell-code description fw-bold fs-5">ASIN :</span>B09TWSRMCB
-                                    </p>
+                                    @if ($book->discountable)
+                                        @if ($book->discountable_type == 'App\Models\FlashSale')
+                                            <div class="discount d-flex gap-3">
+                                                <i class="fas fa-bolt"></i>
+                                                <p class="discount_code">Flash Sale
+                                                    {{ $book->discountable->percentage }}%</p>
+                                            </div>
+                                        @else
+                                            <div class="discount d-flex gap-3">
+                                                <i class="fas fa-percent"></i>
+                                                <p class="discount_code">Discount
+                                                    {{ $book->discountable->percentage }}%</p>
+                                            </div>
+                                            <p class="sell-code description fw-bold fs-5">
+                                                <span>CODE : </span>{{ $book->discountable->code }}
+                                            </p>
+                                        @endif
+                                    @endif
                                 </div>
                             </div>
 

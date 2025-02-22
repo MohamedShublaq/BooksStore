@@ -11,12 +11,12 @@ class WishlistController extends Controller
     public function index()
     {
         if (Auth::check()) {
-            $books = Book::whereHas('favorites', function ($q) {
+            $books = Book::with('author')->whereHas('favorites', function ($q) {
                 $q->where('user_id', Auth::id());
             })->get();
         } else {
             $booksIds = session()->get('wishlist', []);
-            $books = Book::whereIn('id', $booksIds)->get();
+            $books = Book::with('author')->whereIn('id', $booksIds)->get();
         }
         return view('Website.wishlist', compact('books'));
     }

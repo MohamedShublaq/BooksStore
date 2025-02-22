@@ -6,15 +6,10 @@
                     <div class="col-5">
                         <p>Item</p>
                     </div>
-                    <div class="col-2">
-                        <p>Quantity</p>
-                    </div>
-                    <div class="col-2">
+                    <div class="col-7">
                         <p>Price</p>
                     </div>
-                    <div class="col-3">
-                        <p>Total Price</p>
-                    </div>
+
                 </div>
 
                 <div class="row">
@@ -24,8 +19,7 @@
                             <div class="item-cart row">
                                 <div class="col-lg-2 col-md-4 col-sm-6">
                                     <div class="item-image">
-                                        <img src="{{ $book->image }}" alt=""
-                                            class="w-100 h-100" />
+                                        <img src="{{ $book->image }}" alt="" class="w-100 h-100" />
                                     </div>
                                 </div>
                                 <div class="col-lg-3 col-md-4 col-sm-6">
@@ -33,31 +27,42 @@
                                         <p class="fw-bold">{{ $book->name }}</p>
                                         <p class="description">
                                             Author:
-                                            <span class="fw-bold text-dark">Robert T. Kiyosanki</span>
+                                            <span class="fw-bold text-dark">{{ $book->author->name }}</span>
                                         </p>
                                         <p class="description book-description">
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                            Mauris et ultricies est. Aliquam in justo varius, sagittis
-                                            neque ut,
+                                            {{ $book->description }}
                                         </p>
-                                        <div class="dlivery d-flex gap-3">
-                                            <img src="{{ asset('assets/website/images/shipping.png') }}" alt=""
-                                                width="20" height="20" />
-                                            <p class="description">Free Shipping Today</p>
-                                        </div>
-                                        <p class="description">
-                                            <span class="sell-code description fw-bold fs-5">ASIN :</span>B09TWSRMCB
-                                        </p>
+                                        @if ($book->discountable)
+                                            @if ($book->discountable_type == 'App\Models\FlashSale')
+                                                <div class="discount d-flex gap-3">
+                                                    <i class="fas fa-bolt"></i>
+                                                    <p class="discount_code">Flash Sale
+                                                        {{ $book->discountable->percentage }}%</p>
+                                                </div>
+                                            @else
+                                                <div class="discount d-flex gap-3">
+                                                    <i class="fas fa-percent"></i>
+                                                    <p class="discount_code">Discount
+                                                        {{ $book->discountable->percentage }}%</p>
+                                                </div>
+                                            @endif
+                                        @endif
                                     </div>
                                 </div>
 
-                                @livewire('book-quantity', ['book' => $book], key('book-quantity-' . $book->id))
+                                <div class="col-lg-6 col-md-4 col-sm-4 d-flex align-items-center">
+                                    @if ($book->discountable)
+                                        @php
+                                            $discountAmount = ($book->price * $book->discountable->percentage) / 100;
+                                            $priceAfterDiscount = $book->price - $discountAmount;
+                                        @endphp
+                                        <p class="fw-bold ms-2 fs-5 mt-3">${{ number_format($priceAfterDiscount, 2) }}</p>
+                                        <p class="des_price">${{ number_format($book->price, 2) }}</p>
+                                    @else
+                                        <p class="fw-bold fs-5 mt-3">${{ number_format($book->price, 2) }}</p>
+                                    @endif
 
-                                <div class="col-lg-2 col-md-4 col-sm-4 d-flex align-items-center">
-                                    <p class="fw-bold fs-5 mt-3">${{ number_format($book->price,2) }}</p>
                                 </div>
-
-                                @livewire('book-total-price', ['book' => $book], key('book-total-price-' . $book->id))
 
                                 <div class="col-lg-1 col-md-4 col-sm-4 d-flex align-items-center">
 
@@ -72,17 +77,6 @@
 
                         @livewire('move-books-from-wishlist-to-cart', ['books' => $books])
 
-                        <button class="main_btn d-flex justify-content-between align-items-center col-12 col-md-5 col-lg-4">
-
-                            @livewire('check-out-from-wishlist', ['books' => $books])
-
-                            <div>
-                                <p class="fs-6 fw-bold">Check out</p>
-                            </div>
-                            <div class="arrow-icon">
-                                <i class="fa-solid fa-arrow-right"></i>
-                            </div>
-                        </button>
                     </div>
                 </div>
             </div>

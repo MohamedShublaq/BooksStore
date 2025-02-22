@@ -19,9 +19,15 @@ class CheckOutFromCart extends Component
     public function mount()
     {
         foreach ($this->books as $book) {
-            $this->bookPrices[$book->id] = $book->price;
+            if ($book->discountable_type == 'App\Models\FlashSale') {
+                $discountAmount = ($book->price * $book->discountable->percentage) / 100;
+                $price = $book->price - $discountAmount;
+                $this->bookPrices[$book->id] = $price;
+            }
+            else {
+                $this->bookPrices[$book->id] = $book->price;
+            }
         }
-
         $this->subTotal = array_sum($this->bookPrices);
     }
 

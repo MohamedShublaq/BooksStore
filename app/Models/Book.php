@@ -109,17 +109,17 @@ class Book extends Model
 
         if ($this->discountable instanceof Discount) {
             return [
-                'message' => "{$this->discountable->percentage}% Discount code: {$this->discountable->code}"
+                'message' => "Discount {$this->discountable->percentage}%"
             ];
         }
 
         if ($this->discountable instanceof FlashSale) {
-            return ['message' => "{$this->discountable->percentage}% Flash Sale"];
+            return ['message' => "Flash Sale {$this->discountable->percentage}%"];
         }
 
         if ($this->category->discount) {
             return [
-                'message' => "{$this->category->discount->percentage}% Discount code: {$this->category->discount->code}"
+                'message' => "Discount {$this->category->discount->percentage}%"
             ];
         }
 

@@ -12,7 +12,13 @@ class BookTotalPrice extends Component
 
     public function mount()
     {
-        $this->totalPrice = $this->book->price;
+        if ($this->book->discountable_type == 'App\Models\FlashSale') {
+            $discountAmount = ($this->book->price * $this->book->discountable->percentage) / 100;
+            $this->totalPrice = $this->book->price - $discountAmount;
+        }
+        else {
+            $this->totalPrice = $this->book->price;
+        }
     }
 
     public function updateTotal($bookId, $newTotalPrice)

@@ -35,7 +35,15 @@ class BookQuantity extends Component
 
     public function updateTotal()
     {
-        $price = $this->discountedPrice ?? $this->book->price;
+        if ($this->discountedPrice !== null) {
+            $price = $this->discountedPrice;
+        } elseif ($this->book->discountable_type == 'App\Models\FlashSale') {
+            $discountAmount = ($this->book->price * $this->book->discountable->percentage) / 100;
+            $price = $this->book->price - $discountAmount;
+        }
+          else {
+            $price = $this->book->price;
+        }
         $this->dispatch('totalUpdated', $this->book->id, $this->quantity * $price);
     }
 

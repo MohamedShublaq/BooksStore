@@ -12,12 +12,12 @@ class CartController extends Controller
     public function index()
     {
         if (Auth::check()) {
-            $books = Book::whereHas('carts', function ($q) {
+            $books = Book::with('author')->whereHas('carts', function ($q) {
                 $q->where('user_id', Auth::id());
             })->get();
         } else {
             $booksIds = session()->get('cart', []);
-            $books = Book::whereIn('id', $booksIds)->get();
+            $books = Book::with('author')->whereIn('id', $booksIds)->get();
         }
         return view('Website.cart' , compact('books'));
     }

@@ -8,6 +8,7 @@ class BookPrice extends Component
 {
     public $book;
     public $discountedPrice = null;
+    public $flashSalePrice = null;
     protected $listeners =['bookPriceAfterDiscount' => 'bookPriceAfterDiscount'];
 
     public function bookPriceAfterDiscount($bookId, $discountAmount)
@@ -20,6 +21,10 @@ class BookPrice extends Component
 
     public function render()
     {
+        if ($this->book->discountable_type == 'App\Models\FlashSale') {
+            $discountAmount = ($this->book->price * $this->book->discountable->percentage) / 100;
+            $this->flashSalePrice = $this->book->price - $discountAmount;
+        }
         return view('livewire.book-price');
     }
 }

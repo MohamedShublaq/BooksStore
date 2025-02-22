@@ -15,12 +15,12 @@ class CartPage extends Component
     public function updateCartPage()
     {
         if (Auth::check()) {
-            $this->books = Book::whereHas('carts', function ($q) {
+            $this->books = Book::with('author')->whereHas('carts', function ($q) {
                 $q->where('user_id', Auth::id());
             })->get();
         } else {
             $booksIds = session()->get('cart', []);
-            $this->books = Book::whereIn('id', $booksIds)->get();
+            $this->books = Book::with('author')->whereIn('id', $booksIds)->get();
         }
     }
 

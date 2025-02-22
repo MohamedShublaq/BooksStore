@@ -6,7 +6,7 @@ body {
     min-height: 20vh;
 }
 
-.dlivery {
+/* .dlivery {
     border: 1px solid #22222233;
     background-color: #fff;
     padding: 0.5rem 0.5rem;
@@ -16,6 +16,30 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+} */
+
+.discount {
+    background-color: #fff;
+    border: 1px solid #ebc305;
+    color: #ebc305;
+    padding: 0.5rem 0.5rem;
+    border-radius: 0.5rem;
+    height: fit-content;
+    width: 70%;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.discount_code {
+    white-space: nowrap;
+}
+
+.des_price {
+    text-decoration: line-through;
+    color: #22222280;
+    font-weight: 600;
 }
 
 .books_count span {

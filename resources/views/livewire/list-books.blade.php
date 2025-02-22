@@ -10,10 +10,10 @@
             </div>
             <div class="col-12 col-lg-9">
                 <div class="book_detailes">
-                    <div class="d-flex align-items-start book_detailes__content">
+                    <div class="d-flex align-items-start justify-content-between book_detailes__content">
                         <div>
                             <p class="book_detailes__title">
-                                <a href="{{ route('showBook', $book->slug) }}">{{ $book->name}}</a>
+                                <a href="{{ route('showBook', $book->slug) }}">{{ $book->name }}</a>
                             </p>
                             <p class="book_detailes__description">
                                 {{ $book->description }}
@@ -21,7 +21,7 @@
                         </div>
                         {{-- Call getFlag function in the Book model --}}
                         @if ($flag = $book->getFlag())
-                            <div class="discount">
+                            <div class="discount ms-auto">
                                 <p class="discount_code">{{ $flag['message'] }}</p>
                             </div>
                         @endif
@@ -56,7 +56,18 @@
                         </div>
                         <div class="flex-grow-1">
                             <div class="recommended_card__price">
-                                <p class="text-end mb-4">{{ $book->price }} EGP</p>
+                                @if ($book->discountable)
+                                    @php
+                                        $discountAmount = ($book->price * $book->discountable->percentage) / 100;
+                                        $priceAfterDiscount = $book->price - $discountAmount;
+                                    @endphp
+                                    <div class="d-flex justify-content-end align-content-between mb-4">
+                                        <p class="fs-3">${{ $priceAfterDiscount }}</p>
+                                        <p class="des_price">${{ $book->price }}</p>
+                                    </div>
+                                @else
+                                    <p class="text-end mb-4">${{ $book->price }}</p>
+                                @endif
                                 @if ($book->quantity > 0 && $book->is_available)
                                     @livewire('action-books', ['book' => $book], key('book-actions-' . $book->id))
                                 @endif

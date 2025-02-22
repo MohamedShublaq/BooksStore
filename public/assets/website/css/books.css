@@ -61,6 +61,13 @@ body {
   height: fit-content;
 }
 
+.des_price {
+    text-decoration: line-through;
+    color: #22222280;
+    font-size: 1.4rem;
+    font-weight: 600;
+}
+
 .discount_code {
   white-space: nowrap;
 }
