@@ -2,13 +2,15 @@
 
 namespace App\Models;
 
+use App\Observers\BookObserver;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Cviebrock\EloquentSluggable\Sluggable;
 use EloquentFilter\Filterable;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
-
+#[ObservedBy([BookObserver::class])]
 class Book extends Model
 {
     use HasFactory, Sluggable, Filterable;
@@ -22,6 +24,7 @@ class Book extends Model
         'slug',
         'image',
         'description',
+        'total_stock',
         'quantity',
         'pages',
         'num_of_viewers',

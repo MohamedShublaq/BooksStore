@@ -24,9 +24,9 @@
                     <div class="col-3">
                         <div class="form-group">
                             <label>
-                                {{ __('books.Quantity') }} <span style="color: red;">*</span>
+                                {{ __('books.TotalStock') }} <span style="color: red;">*</span>
                             </label>
-                            <x-adminlte-input name="quantity" type="text" fgroup-class="mb-4" required>
+                            <x-adminlte-input name="total_stock" type="text" fgroup-class="mb-4" required>
                             </x-adminlte-input>
                         </div>
                     </div>

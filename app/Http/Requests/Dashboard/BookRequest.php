@@ -31,7 +31,7 @@ class BookRequest extends FormRequest
                 'file', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'
             ],
             'description' => ['required', 'string', 'min:2'],
-            'quantity' => ['required', 'integer', 'min:1'],
+            'total_stock' => ['required', 'integer', 'min:1'],
             'pages' => ['required', 'integer', 'min:1'],
             'rate' => ['required', 'numeric', 'min:0'],
             'publish_year' => ['required', 'digits:4', 'integer'],

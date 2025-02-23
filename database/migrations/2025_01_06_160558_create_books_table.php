@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->string('image')->nullable();
             $table->string('description');
+            $table->unsignedSmallInteger('total_stock');
             $table->unsignedSmallInteger('quantity');
             $table->unsignedBigInteger('pages');
             $table->unsignedBigInteger('num_of_viewers')->default(0);

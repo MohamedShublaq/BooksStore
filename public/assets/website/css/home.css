@@ -224,7 +224,6 @@ input[type="range"] {
   background: linear-gradient(to right, #eaa451 50%, #ffffff1a 50%);
   border-radius: 5px;
   outline: none;
-  cursor: pointer;
   transition: background 0.2s;
 }
 

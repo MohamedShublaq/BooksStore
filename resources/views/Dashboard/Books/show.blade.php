@@ -14,7 +14,7 @@
         </div>
         <div class="card-body">
             <div class="row">
-                <div class="col-3">
+                <div class="col-2">
                     <div class="form-group">
                         <label>
                             {{ __('books.Name') }}
@@ -23,16 +23,34 @@
                             disabled />
                     </div>
                 </div>
-                <div class="col-3">
+                <div class="col-2">
                     <div class="form-group">
                         <label>
-                            {{ __('books.Quantity') }}
+                            {{ __('books.TotalStock') }}
+                        </label>
+                        <x-adminlte-input name="total_stock" type="text" value="{{ $book->total_stock }}" fgroup-class="mb-4"
+                            disabled />
+                    </div>
+                </div>
+                <div class="col-2">
+                    <div class="form-group">
+                        <label>
+                            {{ __('books.RemainingQuantity') }}
                         </label>
                         <x-adminlte-input name="quantity" type="text" value="{{ $book->quantity }}" fgroup-class="mb-4"
                             disabled />
                     </div>
                 </div>
-                <div class="col-3">
+                <div class="col-2">
+                    <div class="form-group">
+                        <label>
+                            {{ __('books.Year') }}
+                        </label>
+                        <x-adminlte-input name="publish_year" type="text" value="{{ $book->publish_year }}"
+                            fgroup-class="mb-4" disabled />
+                    </div>
+                </div>
+                <div class="col-2">
                     <div class="form-group">
                         <label>
                             {{ __('books.Pages') }}
@@ -41,7 +59,7 @@
                             disabled />
                     </div>
                 </div>
-                <div class="col-3">
+                <div class="col-2">
                     <div class="form-group">
                         <label>
                             {{ __('books.Viewers') }}
@@ -52,7 +70,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-3">
+                <div class="col-4">
                     <div class="form-group">
                         <label>
                             {{ __('books.Rate') }}
@@ -61,16 +79,7 @@
                             disabled />
                     </div>
                 </div>
-                <div class="col-3">
-                    <div class="form-group">
-                        <label>
-                            {{ __('books.Year') }}
-                        </label>
-                        <x-adminlte-input name="publish_year" type="text" value="{{ $book->publish_year }}"
-                            fgroup-class="mb-4" disabled />
-                    </div>
-                </div>
-                <div class="col-3">
+                <div class="col-4">
                     <div class="form-group">
                         <label>
                             {{ __('books.Price') }}
@@ -79,7 +88,7 @@
                             disabled />
                     </div>
                 </div>
-                <div class="col-3">
+                <div class="col-4">
                     <div class="form-group">
                         <label>
                             {{ __('books.Availability') }}

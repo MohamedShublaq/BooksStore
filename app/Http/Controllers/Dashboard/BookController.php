@@ -164,7 +164,7 @@ class BookController extends Controller implements HasMiddleware
         return $request->only([
             'name',
             'description',
-            'quantity',
+            'total_stock',
             'pages',
             'rate',
             'publish_year',

@@ -31,7 +31,7 @@
             <table class="table table-bordered table-striped">
                 <x-table-header :headers="[
                     __('books.Name'),
-                    __('books.Quantity'),
+                    __('books.RemainingQuantity'),
                     __('books.Price'),
                     __('books.Availability'),
                     __('books.Language'),
