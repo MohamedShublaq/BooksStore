@@ -25,7 +25,9 @@
 
     @include('Website.__recommendedSection')
 
-    @include('Website.__flashSaleSection')
+    @if ($flashSaleBooks->count() > 0)
+        @include('Website.__flashSaleSection')
+    @endif
 
 @endsection
 

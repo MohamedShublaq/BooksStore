@@ -409,6 +409,12 @@ return [
             'icon' => 'fas fa-envelope',
             'can' => 'contacts',
         ],
+        [
+            'text' => 'Settings',
+            'url' => 'admin/settings',
+            'icon' => 'fas fa-cog',
+            'can' => 'settings',
+        ],
     ],
 
     /*

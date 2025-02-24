@@ -44,5 +44,9 @@ return [
                 'en' => 'Shipping Areas',
                 'ar' => 'مناطق الشحن',
             ],
+            'settings' => [
+                'en' => 'Settings',
+                'ar' => 'الإعدادات',
+            ],
         ],
 ];

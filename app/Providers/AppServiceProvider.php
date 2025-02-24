@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Schema;
+use App\Models\Setting;
+use Illuminate\Support\Facades\View;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -30,5 +32,14 @@ class AppServiceProvider extends ServiceProvider
                 return $auth->hasAccess($config_permission);
             });
         }
+
+        $settings = Setting::first();
+
+        View::share('socialLinks', [
+            'facebook' => $settings?->facebook ?? 'https://www.facebook.com/',
+            'instagram' => $settings?->instagram ?? 'https://www.instagram.com/',
+            'youtube' => $settings?->youtube ?? 'https://www.youtube.com/',
+            'x' => $settings?->x ?? 'https://twitter.com/',
+        ]);
     }
 }

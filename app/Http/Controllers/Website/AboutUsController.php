@@ -5,12 +5,14 @@ namespace App\Http\Controllers\Website;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Website\ContactRequest;
 use App\Models\ContactUs;
+use App\Models\Setting;
 
 class AboutUsController extends Controller
 {
     public function index ()
     {
-        return view('Website.about');
+        $settings = Setting::first();
+        return view('Website.about', compact('settings'));
     }
 
     public function contact(ContactRequest $request)

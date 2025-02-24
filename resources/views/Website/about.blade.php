@@ -123,21 +123,20 @@
                             <div class="contact_icon">
                                 <i class="fa-solid fa-phone-volume"></i>
                             </div>
-                            <p class="icon-detailes">01123456789</p>
+                            <p class="icon-detailes">{{$settings->phone}}</p>
                         </div>
                         <div class="d-flex gap-3">
                             <div class="contact_icon">
                                 <i class="fa-regular fa-message"></i>
                             </div>
-                            <p class="icon-detailes">Example@gmail.com</p>
+                            <p class="icon-detailes">{{$settings->email}}</p>
                         </div>
                         <div class="d-flex gap-3">
                             <div class="contact_icon">
                                 <i class="fa-solid fa-location-dot"></i>
                             </div>
                             <p class="icon-detailes">
-                                adipiscing elit. Mauris et ultricies est. Aliquam in justo
-                                varius,
+                                {{$settings->address}}
                             </p>
                         </div>
                     </div>
