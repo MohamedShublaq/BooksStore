@@ -59,17 +59,6 @@
                             <strong class="text-danger">{{ $message }}</strong>
                         @enderror
                         <div class="d-flex flex-column gap-2 my-3">
-                            <label for="address">Address</label>
-                            <div id="address-container" class="d-flex flex-column gap-2">
-                                <div class="d-flex align-items-center input_container">
-                                    <input type="text" name="address[]" required />
-                                    <button type="button" class="btn btn-danger btn-sm remove-address ms-2 d-none">
-                                        <i class="fa fa-minus"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="d-flex flex-column gap-2 my-3">
                             <label for="password">Password</label>
                             <div class="d-flex align-items-center input_container">
                                 <input type="password" name="password" id="password" required />
@@ -105,68 +94,6 @@
     </section>
 @endsection
 @push('js')
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const addressContainer = document.getElementById("address-container");
-
-            // Function to update the buttons visibility
-            function updateButtons() {
-                const addressFields = addressContainer.querySelectorAll(".input_container");
-
-                addressFields.forEach((field, index) => {
-                    const minusButton = field.querySelector(".remove-address");
-                    const plusButton = field.querySelector(".add-address");
-
-                    // Show "-" button for the first input only, plus for others
-                    if (addressFields.length > 1) {
-                        minusButton.classList.remove("d-none"); // Show "-" button for all
-                    }
-
-                    if (index === addressFields.length - 1) {
-                        // Last field: show the "+" button
-                        if (!field.querySelector(".add-address")) {
-                            const addButton = document.createElement("button");
-                            addButton.type = "button";
-                            addButton.classList.add("btn", "btn-success", "btn-sm", "add-address", "ms-2");
-                            addButton.innerHTML = '<i class="fa fa-plus"></i>';
-                            field.appendChild(addButton);
-                        }
-                    } else {
-                        // Remove the "+" button if it's not the last input
-                        const addButton = field.querySelector(".add-address");
-                        if (addButton) {
-                            addButton.remove();
-                        }
-                    }
-
-                    // Show or hide the "-" button based on the number of inputs
-                    minusButton.classList.toggle("d-none", addressFields.length === 1);
-                });
-            }
-
-            // Add new address field
-            addressContainer.addEventListener("click", function(e) {
-                if (e.target.closest(".add-address")) {
-                    const newField = addressContainer.firstElementChild.cloneNode(true);
-                    newField.querySelector("input").value = "";
-                    addressContainer.appendChild(newField);
-                    updateButtons();
-                }
-            });
-
-            // Remove address field
-            addressContainer.addEventListener("click", function(e) {
-                if (e.target.closest(".remove-address")) {
-                    e.target.closest(".input_container").remove();
-                    updateButtons();
-                }
-            });
-
-            // Initial button setup
-            updateButtons();
-        });
-    </script>
-
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             // Toggle for password field

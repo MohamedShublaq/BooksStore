@@ -17,14 +17,7 @@ class RegisterController extends Controller
     public function register(RegisterRequest $request)
     {
         try {
-            $user = User::create($request->only('first_name','last_name','email','phone','password'));
-            if($user){
-                foreach ($request->address as $address) {
-                    $user->addresses()->create([
-                        'address' => $address,
-                    ]);
-                }
-            }
+            User::create($request->only('first_name','last_name','email','phone','password'));
             return redirect()->route('login');
         } catch (\Exception $e) {
             Log::error("Error registration user: " . $e->getMessage());

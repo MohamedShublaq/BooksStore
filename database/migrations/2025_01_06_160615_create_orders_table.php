@@ -3,6 +3,7 @@
 use App\Models\Order;
 use App\Models\ShippingArea;
 use App\Models\User;
+use App\Models\UserAddress;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -21,11 +22,11 @@ return new class extends Migration
             $table->float('tax_amount');
             $table->float('books_total');
             $table->float('total');
-            $table->unsignedTinyInteger('status')->default(Order::DEFAULT_STATUS);
-            $table->unsignedTinyInteger('payment_status')->default(Order::DEFAULT_PAYMENT_STATUS);
-            $table->unsignedTinyInteger('payment_type')->default(Order::DEFAULT_PAYMENT_TYPE);
-            $table->string('transaction_reference');
-            $table->string('address');
+            $table->unsignedTinyInteger('status')->default(Order::DEFAULT_STATUS)->nullable();//nullable for test
+            $table->unsignedTinyInteger('payment_status');
+            $table->unsignedTinyInteger('payment_type');
+            $table->string('transaction_reference')->nullable();//nullable for test
+            $table->foreignIdFor(UserAddress::class)->nullable()->constrained()->nullOnDelete();
             $table->foreignIdFor(ShippingArea::class)->nullable()->constrained()->nullOnDelete();
             $table->foreignIdFor(User::class)->nullable()->constrained()->nullOnDelete();
             $table->timestamps();

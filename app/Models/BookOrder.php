@@ -16,7 +16,9 @@ class BookOrder extends Model
     protected $fillable = [
         'book_id',
         'order_id',
-        'price',
+        'original_price',
+        'price_after_discount',
+        'applied_discount',
         'quantity'
     ];
 }

@@ -12,7 +12,7 @@ class BookTotalPrice extends Component
 
     public function mount()
     {
-        if ($this->book->discountable_type == 'App\Models\FlashSale') {
+        if ($this->book->discountable_type == 'App\Models\FlashSale' && \Carbon\Carbon::now() >= $this->book->discountable->date) {
             $discountAmount = ($this->book->price * $this->book->discountable->percentage) / 100;
             $this->totalPrice = $this->book->price - $discountAmount;
         }
@@ -21,10 +21,10 @@ class BookTotalPrice extends Component
         }
     }
 
-    public function updateTotal($bookId, $newTotalPrice)
+    public function updateTotal($bookId, $quantity, $price)
     {
         if ($this->book->id === $bookId) {
-            $this->totalPrice = $newTotalPrice;
+            $this->totalPrice = $quantity * $price;
         }
     }
 

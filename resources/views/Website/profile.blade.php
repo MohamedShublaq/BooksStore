@@ -59,25 +59,27 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="d-flex flex-column gap-2 my-3">
-                                <label for="address">Address</label>
-                                <div id="address-container" class="d-flex flex-column gap-2">
-                                    @foreach ($addresses as $index => $address)
-                                        <div class="d-flex align-items-center input_container">
-                                            <input type="text" name="addresses[]" value="{{ $address->address }}"
-                                                required />
-                                            <button type="button" class="btn btn-danger btn-sm remove-address ms-2">
-                                                <i class="fa fa-minus"></i>
-                                            </button>
-                                            @if ($loop->last)
-                                                <button type="button" class="btn btn-success btn-sm add-address ms-2">
-                                                    <i class="fa fa-plus"></i>
+                            @if (count($addresses) > 0)
+                                <div class="d-flex flex-column gap-2 my-3">
+                                    <label for="address">Address</label>
+                                    <div id="address-container" class="d-flex flex-column gap-2">
+                                        @foreach ($addresses as $index => $address)
+                                            <div class="d-flex align-items-center input_container">
+                                                <input type="text" name="addresses[]" value="{{ $address->address }}"
+                                                    required />
+                                                <button type="button" class="btn btn-danger btn-sm remove-address ms-2">
+                                                    <i class="fa fa-minus"></i>
                                                 </button>
-                                            @endif
-                                        </div>
-                                    @endforeach
+                                                @if ($loop->last)
+                                                    <button type="button" class="btn btn-success btn-sm add-address ms-2">
+                                                        <i class="fa fa-plus"></i>
+                                                    </button>
+                                                @endif
+                                            </div>
+                                        @endforeach
+                                    </div>
                                 </div>
-                            </div>
+                            @endif
                         </div>
                         <div class="d-flex justify-content-center">
                             <button type="submit" class="main_btn mt-3">Update information</button>

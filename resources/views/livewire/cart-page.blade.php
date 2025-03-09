@@ -35,13 +35,14 @@
                                         {{ $book->description }}
                                     </p>
                                     @if ($book->discountable)
-                                        @if ($book->discountable_type == 'App\Models\FlashSale')
+                                        @if ($book->discountable_type == 'App\Models\FlashSale' && \Carbon\Carbon::now() >= $book->discountable->date)
                                             <div class="discount d-flex gap-3">
                                                 <i class="fas fa-bolt"></i>
                                                 <p class="discount_code">Flash Sale
                                                     {{ $book->discountable->percentage }}%</p>
                                             </div>
-                                        @else
+                                        @endif
+                                        @if ($book->discountable_type == 'App\Models\Discount')
                                             <div class="discount d-flex gap-3">
                                                 <i class="fas fa-percent"></i>
                                                 <p class="discount_code">Discount

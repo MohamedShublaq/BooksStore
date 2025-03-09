@@ -116,7 +116,7 @@ class Book extends Model
             ];
         }
 
-        if ($this->discountable instanceof FlashSale) {
+        if ($this->discountable instanceof FlashSale && \Carbon\Carbon::now() >= $this->discountable->date) {
             return ['message' => "Flash Sale {$this->discountable->percentage}%"];
         }
 

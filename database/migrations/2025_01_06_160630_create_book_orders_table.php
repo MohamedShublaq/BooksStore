@@ -17,7 +17,9 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(Book::class)->constrained()->cascadeOnDelete();
             $table->foreignIdFor(Order::class)->constrained()->cascadeOnDelete();
-            $table->float('price');
+            $table->float('original_price');
+            $table->float('price_after_discount');
+            $table->float('applied_discount');
             $table->unsignedSmallInteger('quantity')->default(1);
             $table->timestamps();
         });

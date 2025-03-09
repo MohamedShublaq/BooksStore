@@ -4,5 +4,6 @@ namespace App\Enums;
 
 enum PaymentStatus:int
 {
-    case Test = 0;
+    case Unpaid = 0;
+    case Paid = 1;
 }

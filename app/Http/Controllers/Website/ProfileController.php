@@ -22,13 +22,15 @@ class ProfileController extends Controller
             $user = Auth::guard('web')->user();
             $user->update($request->only(['first_name', 'last_name', 'email', 'phone']));
 
-            $requestAddresses = $request->addresses;
-            $existingAddresses = $user->addresses->pluck('address')->toArray();
-            $user->addresses()->whereNotIn('address', $requestAddresses)->delete();
-            $newAddresses = array_diff($requestAddresses, $existingAddresses);
+            if ($request->has('addresses')) {
+                $requestAddresses = $request->addresses;
+                $existingAddresses = $user->addresses->pluck('address')->toArray();
+                $user->addresses()->whereNotIn('address', $requestAddresses)->delete();
+                $newAddresses = array_diff($requestAddresses, $existingAddresses);
 
-            foreach ($newAddresses as $newAddress) {
-                $user->addresses()->create(['address' => $newAddress]);
+                foreach ($newAddresses as $newAddress) {
+                    $user->addresses()->create(['address' => $newAddress]);
+                }
             }
             return redirect()->route('home')->with('success', 'Profile Updated Successfully');
         } catch (\Exception $e) {

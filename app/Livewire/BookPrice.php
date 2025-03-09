@@ -21,7 +21,7 @@ class BookPrice extends Component
 
     public function render()
     {
-        if ($this->book->discountable_type == 'App\Models\FlashSale') {
+        if ($this->book->discountable_type == 'App\Models\FlashSale' && \Carbon\Carbon::now() >= $this->book->discountable->date) {
             $discountAmount = ($this->book->price * $this->book->discountable->percentage) / 100;
             $this->flashSalePrice = $this->book->price - $discountAmount;
         }

@@ -56,7 +56,7 @@
                         </div>
                         <div class="flex-grow-1">
                             <div class="recommended_card__price">
-                                @if ($book->discountable)
+                                @if ($book->discountable_type == 'App\Models\Discount' || ($book->discountable_type == 'App\Models\FlashSale' && \Carbon\Carbon::now() >= $book->discountable->date ))
                                     @php
                                         $discountAmount = ($book->price * $book->discountable->percentage) / 100;
                                         $priceAfterDiscount = $book->price - $discountAmount;

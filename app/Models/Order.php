@@ -26,7 +26,7 @@ class Order extends Model
         'payment_status',
         'payment_type',
         'transaction_reference',
-        'address',
+        'user_address_id',
         'shipping_area_id',
         'user_id',
     ];
@@ -37,12 +37,14 @@ class Order extends Model
         'payment_type' => PaymentType::class,
     ];
 
-    public const DEFAULT_PAYMENT_TYPE = PaymentType::Cash;
-    public const DEFAULT_PAYMENT_STATUS = PaymentStatus::Test;
     public const DEFAULT_STATUS = OrderStatus::Test;
 
     public function user(){
         return $this->belongsTo(User::class);
+    }
+
+    public function address(){
+        return $this->belongsTo(UserAddress::class);
     }
 
     public function shippingArea(){

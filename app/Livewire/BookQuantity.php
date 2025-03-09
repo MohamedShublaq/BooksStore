@@ -37,14 +37,14 @@ class BookQuantity extends Component
     {
         if ($this->discountedPrice !== null) {
             $price = $this->discountedPrice;
-        } elseif ($this->book->discountable_type == 'App\Models\FlashSale') {
+        } elseif ($this->book->discountable_type == 'App\Models\FlashSale' && \Carbon\Carbon::now() >= $this->book->discountable->date) {
             $discountAmount = ($this->book->price * $this->book->discountable->percentage) / 100;
             $price = $this->book->price - $discountAmount;
         }
           else {
             $price = $this->book->price;
         }
-        $this->dispatch('totalUpdated', $this->book->id, $this->quantity * $price);
+        $this->dispatch('totalUpdated', $this->book->id, $this->quantity, $price);
     }
 
     public function render()

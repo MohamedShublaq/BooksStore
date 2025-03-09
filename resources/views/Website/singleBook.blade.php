@@ -80,7 +80,7 @@
                             </div>
                         </div>
                         <br>
-                        @if ($book->discountable)
+                        @if ($book->discountable_type == 'App\Models\Discount' || ($book->discountable_type == 'App\Models\FlashSale' && \Carbon\Carbon::now() >= $book->discountable->date ))
                             @php
                                 $discountAmount = ($book->price * $book->discountable->percentage) / 100;
                                 $priceAfterDiscount = $book->price - $discountAmount;

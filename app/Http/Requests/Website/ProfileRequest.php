@@ -26,8 +26,8 @@ class ProfileRequest extends FormRequest
             'last_name' => ['required','string','min:3'],
             'email' => ['required','email','unique:users,email,' . auth('web')->user()->id],
             'phone' => ['required','string','unique:users,phone,' . auth('web')->user()->id],
-            'addresses' => ['required', 'array', 'min:1'],
-            'addresses.*' => ['required', 'string'],
+            'addresses' => ['nullable', 'array', 'min:1'],
+            'addresses.*' => ['nullable', 'string'],
         ];
     }
 }
