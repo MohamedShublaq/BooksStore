@@ -5,9 +5,12 @@ namespace App\Livewire;
 use App\Enums\PaymentStatus;
 use App\Enums\PaymentType;
 use App\Models\AddToCart;
+use App\Models\Book;
 use App\Models\BookOrder;
+use App\Models\Order;
 use App\Models\Setting;
 use App\Models\ShippingArea;
+use App\Services\PaymobService;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -27,8 +30,8 @@ class CheckOutFromCart extends Component
     public $selectedAddress;
     public $showEnterNewAddress = false;
     public $paymentType;
-    public $cash;
-    public $visa;
+    public $cash = PaymentType::Cash;
+    public $visa = PaymentType::Visa;
 
     protected $listeners =
     [
@@ -61,8 +64,6 @@ class CheckOutFromCart extends Component
         $this->tax = Setting::first()->value('tax_percentage') * ($this->subTotal / 100);
         $this->total = $this->subTotal + $this->tax;
         $this->shippingAreas = ShippingArea::get();
-        $this->cash = PaymentType::Cash;
-        $this->visa = PaymentType::Visa;
     }
 
     //From EnterDiscountCode Component
@@ -147,19 +148,29 @@ class CheckOutFromCart extends Component
 
             //Create order
             $order = $user->orders()->create([
-                'number' => strtoupper(substr(md5(time() . $user->id), 0, 8)),
+                'number' => $this->paymentType == $this->cash->value ? $this->generateUniqueOrderNumber() : null,
                 'shipping_fee' => $this->shippingFee,
                 'tax_amount' => $this->tax,
                 'books_total' => $this->subTotal,
                 'total' => $this->total,
                 'payment_type' => $this->paymentType,
-                'payment_status' => $this->paymentType == PaymentType::Cash ? PaymentStatus::Paid : PaymentStatus::Unpaid,
+                'payment_status' => $this->paymentType == $this->cash->value ? PaymentStatus::Paid : PaymentStatus::Unpaid,
                 'shipping_area_id' => $this->selectedShippingArea,
                 'user_address_id' => $this->getUserAddress($user)
             ]);
 
-            //Create order items
             foreach($this->bookPrices as $book) {
+                $bookModel = Book::findOrFail($book['book_id']);
+                // Check if stock is available
+                if ($book['quantity'] > $bookModel->quantity) {
+                    DB::rollBack();
+                    return redirect()->route('cart')->with('error', 'There are only ' . $bookModel->quantity . ' ' . 'books available for ' . $bookModel->name);
+                }
+                if (!$bookModel->is_available) {
+                    DB::rollBack();
+                    return redirect()->route('cart')->with('error', $bookModel->name . ' unavailable now !');
+                }
+                //Create order items
                 BookOrder::create([
                     'book_id' => $book['book_id'],
                     'order_id' => $order->id,
@@ -168,17 +179,40 @@ class CheckOutFromCart extends Component
                     'applied_discount' => $book['applied_discount'],
                     'quantity' => $book['quantity'],
                 ]);
+                // Decrement stock
+                $bookModel->decrement('quantity', $book['quantity']);
             }
 
-            //Clear the cart
+            //Clear the cart directly when case is cash
             AddToCart::where('user_id' , $user->id)->delete();
 
+            $paymentService = app(PaymobService::class);
+
+            if ($order->payment_type == $this->visa) {
+                $paymentData = $paymentService->processPayment($order);
+                if (isset($paymentData['id'])) {
+                    $order->update([
+                        'number' => $paymentData['id']
+                    ]);
+                }
+                DB::commit();
+                return redirect()->away($paymentData['url']);
+            }
             DB::commit();
             return redirect()->route('home');
         } catch(\Exception $e){
             DB::rollback();
             return redirect()->route('home')->with('error', 'Try again!');
         }
+    }
+
+    private function generateUniqueOrderNumber()
+    {
+        do {
+            $number = random_int(10000000, 99999999); // 8-digit number
+        } while (Order::where('number', $number)->exists());
+
+        return $number;
     }
 
     private function getUserAddress($user)

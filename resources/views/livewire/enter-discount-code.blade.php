@@ -1,11 +1,6 @@
 <div class="col-12 col-lg-6">
     <div class="payment">
         <p class="payment_title">Payment Summary</p>
-        <p class="payment_description description fs-6 mt-2">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            Mauris et ultricies est. Aliquam in justo varius, sagittis
-            neque ut, malesuada leo.
-        </p>
         <div class=" py-5">
             <p class="fs-4 description mt-3">Have a discount code?</p>
             <div class="d-flex gap-3 mt-3">

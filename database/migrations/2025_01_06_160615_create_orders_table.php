@@ -17,7 +17,7 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->string('number');
+            $table->string('number')->unique()->nullable();//nullable because visa case
             $table->float('shipping_fee');
             $table->float('tax_amount');
             $table->float('books_total');
@@ -25,7 +25,6 @@ return new class extends Migration
             $table->unsignedTinyInteger('status')->default(Order::DEFAULT_STATUS)->nullable();//nullable for test
             $table->unsignedTinyInteger('payment_status');
             $table->unsignedTinyInteger('payment_type');
-            $table->string('transaction_reference')->nullable();//nullable for test
             $table->foreignIdFor(UserAddress::class)->nullable()->constrained()->nullOnDelete();
             $table->foreignIdFor(ShippingArea::class)->nullable()->constrained()->nullOnDelete();
             $table->foreignIdFor(User::class)->nullable()->constrained()->nullOnDelete();

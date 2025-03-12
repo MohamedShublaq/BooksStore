@@ -25,10 +25,9 @@ class Order extends Model
         'status',
         'payment_status',
         'payment_type',
-        'transaction_reference',
         'user_address_id',
         'shipping_area_id',
-        'user_id',
+        'user_id'
     ];
 
     protected $casts = [
@@ -49,5 +48,10 @@ class Order extends Model
 
     public function shippingArea(){
         return $this->belongsTo(ShippingArea::class);
+    }
+
+    public function books()
+    {
+        return $this->belongsToMany(Book::class , 'book_orders')->withPivot('original_price','price_after_discount','applied_discount','quantity');
     }
 }

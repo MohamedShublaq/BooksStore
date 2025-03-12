@@ -8,6 +8,7 @@ use App\Http\Controllers\Website\Auth\ResetPasswordController;
 use App\Http\Controllers\Website\BooksController;
 use App\Http\Controllers\Website\CartController;
 use App\Http\Controllers\Website\HomeController;
+use App\Http\Controllers\Website\PaymobController;
 use App\Http\Controllers\Website\ProfileController;
 use App\Http\Controllers\Website\SingleBookController;
 use App\Http\Controllers\Website\WishlistController;
@@ -44,6 +45,9 @@ Route::controller(CartController::class)->group(function () {
 Route::controller(WishlistController::class)->group(function () {
     Route::get('/wishlist' , 'index')->name('wishlist');
 });
+
+// **************************************PaymobController************************************** //
+Route::match(['get', 'post'], '/paymob/callback', [PaymobController::class, 'handleCallback'])->name('paymob.callback');
 
 Route::middleware('guest:web')->group(function () {
 
