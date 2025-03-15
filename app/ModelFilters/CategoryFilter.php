@@ -23,13 +23,4 @@ class CategoryFilter extends ModelFilter
             });
         }
     }
-
-    public function discount($value)
-    {
-        if($value){
-            return $this->whereNotNull('discount_id');
-        }else{
-            return $this->whereNull('discount_id');
-        }
-    }
 }

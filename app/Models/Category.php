@@ -15,10 +15,7 @@ class Category extends Model
      * The attributes that are mass assignable.
      *
      */
-    protected $fillable = [
-        'name',
-        'discount_id'
-    ];
+    protected $fillable = ['name'];
 
 
     public $translatable = ['name'];
@@ -26,10 +23,6 @@ class Category extends Model
 
     protected $casts = ['name' => 'array'];
 
-
-    public function discount(){
-        return $this->belongsTo(Discount::class);
-    }
 
     public function books()
     {

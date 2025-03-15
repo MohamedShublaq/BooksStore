@@ -15,7 +15,6 @@ return new class extends Migration
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
             $table->json('name');
-            $table->foreignIdFor(Discount::class)->nullable()->constrained()->nullOnDelete(); //Category can be created without discount.
             $table->timestamps();
         });
     }

@@ -25,16 +25,6 @@
                             fgroup-class="mb-4" required>
                         </x-adminlte-input>
                     </div>
-                    <div class="form-group">
-                        <select class="form-control" name="discount_id" id="discount_id">
-                            @if ($category->discount == null)
-                                <option selected disabled value="">{{__('categories.Select Discount')}}</option>
-                            @endif
-                            @foreach ($discounts as $discount)
-                                <option {{ $category->discount_id == $discount->id ? 'selected' : '' }} value="{{$discount->id}}">{{ $discount->code . ' (' . $discount->percentage . '%)' }}</option>
-                            @endforeach
-                        </select>
-                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary"

@@ -120,12 +120,6 @@ class Book extends Model
             return ['message' => "Flash Sale {$this->discountable->percentage}%"];
         }
 
-        if ($this->category->discount) {
-            return [
-                'message' => "Discount {$this->category->discount->percentage}%"
-            ];
-        }
-
         return null;
     }
 

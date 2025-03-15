@@ -33,7 +33,6 @@
                 <x-table-header :headers="[
                     __('categories.Name'),
                     __('categories.Num of Books'),
-                    __('categories.Discount'),
                     __('categories.Created Since'),
                     __('categories.Last Update'),
                 ]" />
@@ -46,13 +45,6 @@
                             <td class="text-center">{{ $loop->iteration }}</td>
                             <td class="text-center">{{ $category->name }}</td>
                             <td class="text-center">{{ $category->books_count }}</td>
-                            <td class="text-center">
-                                @if ($category->discount)
-                                    {{ $category->discount->code . ' (' . $category->discount->percentage . '%)' }}
-                                @else
-                                    -
-                                @endif
-                            </td>
                             <td class="text-center">{{ $category->created_at->diffForHumans() }}</td>
                             <td class="text-center">{{ $category->updated_at->diffForHumans()  }}</td>
                             <td class="text-center">
@@ -77,7 +69,7 @@
                         @include('Dashboard.Categories.edit')
                     @empty
                         <tr>
-                            <td class="alert alert-danger text-center" colspan="8">{{__('categories.found')}}</td>
+                            <td class="alert alert-danger text-center" colspan="7">{{__('categories.found')}}</td>
                         </tr>
                     @endforelse
                 </tbody>

@@ -21,20 +21,14 @@ class CategoryController extends Controller implements HasMiddleware
 
     public function index()
     {
-        $categories = Category::filter(request()->all())->with('discount')->withCount('books')->orderByDesc('id')->paginate(10);
-        $discounts = Discount::select('id', 'code', 'percentage')->get();
-        return view('Dashboard.Categories.index', compact('categories', 'discounts'));
+        $categories = Category::filter(request()->all())->withCount('books')->orderByDesc('id')->paginate(10);
+        return view('Dashboard.Categories.index', compact('categories'));
     }
 
     public function store(CategoryRequest $request)
     {
         try {
-            Category::create($request->only(['name', 'discount_id']));
-            // if($request->has('discount_id')){
-            //     $numOfBooks = $category->books()->count();
-            //     $discount = Discount::finOrFail($request->discount_id);
-            //     $discount->decrement('quantity', $numOfBooks);
-            // }
+            Category::create($request->only(['name']));
             return redirect()->back()->with('success', __('categories.store_success'));
         } catch (\Exception $e) {
             Log::error("Error creating category: " . $e->getMessage());
@@ -46,7 +40,7 @@ class CategoryController extends Controller implements HasMiddleware
     {
         try {
             $category = Category::findOrFail($id);
-            $category->update($request->only(['name', 'discount_id']));
+            $category->update($request->only(['name']));
             return redirect()->back()->with('success', __('categories.update_success'));
         } catch (\Exception $e) {
             Log::error("Error updating category: " . $e->getMessage());

@@ -23,8 +23,7 @@ class CategoryRequest extends FormRequest
     {
         return [
             'name.en' => ['required','string','min:3','max:50'],
-            'name.ar' => ['required','string','min:3','max:50'],
-            'discount_id' => ['nullable','exists:discounts,id']
+            'name.ar' => ['required','string','min:3','max:50']
         ];
     }
 }
