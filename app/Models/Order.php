@@ -7,10 +7,11 @@ use App\Enums\PaymentStatus;
 use App\Enums\PaymentType;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use EloquentFilter\Filterable;
 
 class Order extends Model
 {
-    use HasFactory;
+    use HasFactory, Filterable;
 
     /**
      * The attributes that are mass assignable.
@@ -43,7 +44,7 @@ class Order extends Model
     }
 
     public function address(){
-        return $this->belongsTo(UserAddress::class);
+        return $this->belongsTo(UserAddress::class , 'user_address_id');
     }
 
     public function shippingArea(){

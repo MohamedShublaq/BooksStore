@@ -10,6 +10,8 @@ return [
     'content_management' => 'CONTENT MANAGEMENT',
     'Authorizations' => 'Authorizations',
     'Admins' => 'Admins',
+    'Users' => 'Users',
+    'Orders' => 'Orders',
     'Publishers' => 'Publishers',
     'Authors' => 'Authors',
     'Discounts' => 'Discounts',

@@ -12,6 +12,14 @@ return [
                 'en' => 'Authorizations',
                 'ar' => 'تعيين الصلاحيات',
             ],
+            'users' => [
+                'en' => 'Users',
+                'ar' => 'المستخدمين',
+            ],
+            'orders' => [
+                'en' => 'Orders',
+                'ar' => 'الأوردرات',
+            ],
             'publishers' => [
                 'en' => 'Publishers',
                 'ar' => 'الناشرين',

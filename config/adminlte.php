@@ -359,7 +359,19 @@ return [
         ],
         [
             'header' => 'content_management',
-            'can' => ['publishers','authors','discounts','flash_sales','categories','shipping_areas','contacts']
+            'can' => ['users','orders','publishers','authors','discounts','flash_sales','categories','shipping_areas','contacts']
+        ],
+        [
+            'text' => 'Users',
+            'url' => 'admin/users',
+            'icon' => 'fas fa-users',
+            'can' => 'users',
+        ],
+        [
+            'text' => 'Orders',
+            'url' => 'admin/orders',
+            'icon' => 'fas fa-shopping-cart',
+            'can' => 'orders',
         ],
         [
             'text' => 'Publishers',
@@ -374,18 +386,6 @@ return [
             'can' => 'authors',
         ],
         [
-            'text' => 'Discounts',
-            'url' => 'admin/discounts',
-            'icon' => 'fas fa-percent',
-            'can' => 'discounts',
-        ],
-        [
-            'text' => 'Flash Sales',
-            'url' => 'admin/flash-sales',
-            'icon' => 'fas fa-bolt',
-            'can' => 'flash_sales',
-        ],
-        [
             'text' => 'Categories',
             'url' => 'admin/categories',
             'icon' => 'fas fa-list',
@@ -396,6 +396,18 @@ return [
             'url' => 'admin/books',
             'icon' => 'fas fa-book',
             'can' => 'books',
+        ],
+        [
+            'text' => 'Discounts',
+            'url' => 'admin/discounts',
+            'icon' => 'fas fa-percent',
+            'can' => 'discounts',
+        ],
+        [
+            'text' => 'Flash Sales',
+            'url' => 'admin/flash-sales',
+            'icon' => 'fas fa-bolt',
+            'can' => 'flash_sales',
         ],
         [
             'text' => 'Shipping Areas',

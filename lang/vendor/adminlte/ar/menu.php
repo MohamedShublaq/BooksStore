@@ -10,6 +10,8 @@ return [
     'content_management' => 'إدارة المحتوى',
     'Authorizations' => 'الصلاحيات',
     'Admins' => 'المدراء',
+    'Users' => 'المستخدمين',
+    'Orders' => 'الأوردرات',
     'Publishers' => 'الناشرين',
     'Authors' => 'الكاتبين',
     'Discounts' => 'الخصومات',

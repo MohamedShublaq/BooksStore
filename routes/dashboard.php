@@ -10,10 +10,12 @@ use App\Http\Controllers\Dashboard\ContactController;
 use App\Http\Controllers\Dashboard\DiscountController;
 use App\Http\Controllers\Dashboard\FlashSaleController;
 use App\Http\Controllers\Dashboard\HomeController;
+use App\Http\Controllers\Dashboard\OrderController;
 use App\Http\Controllers\Dashboard\ProfileController;
 use App\Http\Controllers\Dashboard\PublisherController;
 use App\Http\Controllers\Dashboard\SettingsController;
 use App\Http\Controllers\Dashboard\ShippingAreaController;
+use App\Http\Controllers\Dashboard\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::as('admin.')->prefix('admin')->group(function () {
@@ -56,6 +58,9 @@ Route::as('admin.')->prefix('admin')->group(function () {
         // **************************************AdminController************************************** //
         Route::resource('admins' , AdminController::class)->except('show');
 
+        // **************************************UserController************************************** //
+        Route::resource('users' , UserController::class)->only(['index','show','destroy']);
+
         // **************************************PublisherController************************************** //
         Route::resource('publishers' , PublisherController::class)->except(['show','create','edit']);
 
@@ -82,6 +87,9 @@ Route::as('admin.')->prefix('admin')->group(function () {
 
         // **************************************BookController************************************** //
         Route::resource('books' , BookController::class);
+
+        // **************************************OrderController************************************** //
+        Route::resource('orders' , OrderController::class)->only(['index','show','destroy']);
 
         // **************************************SettingsController************************************** //
         Route::controller(SettingsController::class)->prefix('settings')->group(function () {

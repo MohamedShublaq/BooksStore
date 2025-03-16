@@ -21,4 +21,8 @@ class BookOrder extends Model
         'applied_discount',
         'quantity'
     ];
+
+    public function book(){
+        return $this->belongsTo(Book::class);
+    }
 }
